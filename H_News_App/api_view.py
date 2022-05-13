@@ -5,22 +5,31 @@ from .models import News
 from .serializers import NewsSerializer
 
 
-@api_view(['GET', 'POST', 'PUT', 'DELETE'])
+@api_view(['GET', 'POST'])
 def handle_api_request(request):
     '''
-    handles incoming api requests
+    handles incoming get and post requests
     '''
     if request.method == 'GET':
         news= News.objects.all()
-        newsSerializer= NewsSerializer(news, many= True)
-        return Response(newsSerializer.data)
+        serializer= NewsSerializer(news, many= True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'POST':
-        posted_data= NewsSerializer(data= request.POST)
-        if posted_data.is_valid():
-            posted_data.save()
-            return Response(data=posted_data)
-        return Response('invalid input.', status.HTTP_400_BAD_REQUEST)
-    elif request.method == 'PUT':
-        pass
+        serializer= NewsSerializer(data=request.data)
+        if serializer.is_valid(): 
+            return Response({"message": "your item was created. You can refresh now."}, status=status.HTTP_200_OK)
     else:
-        pass
+        return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+# @api_view(['DELETE'])
+# def handle_api_request(request):
+#     '''
+#     handles incoming delete requests
+#     '''
+#     if request.method == 'POST':
+#         serializer= NewsSerializer(request.data)
+#         if serializer.is_valid(): 
+#             return Response({"message": "your item was created"}, status=status.HTTP_200_OK)
+#     return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
