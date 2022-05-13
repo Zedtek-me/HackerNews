@@ -6,7 +6,7 @@ from .serializers import NewsSerializer
 
 
 @api_view(['GET', 'POST'])
-def handle_api_request(request):
+def handle_get_and_post(request):
     '''
     handles incoming get and post requests
     '''
@@ -23,12 +23,12 @@ def handle_api_request(request):
     
 
 
-# @api_view(['DELETE'])
-# def handle_api_request(request):
+# @api_view(['PUT','DELETE'])
+# def handle_update_and_delete(request, id):
 #     '''
-#     handles incoming delete requests
+#     handles incoming update and delete requests
 #     '''
-#     if request.method == 'POST':
+#     if request.method == 'PUT':
 #         serializer= NewsSerializer(request.data)
 #         if serializer.is_valid(): 
 #             return Response({"message": "your item was created"}, status=status.HTTP_200_OK)

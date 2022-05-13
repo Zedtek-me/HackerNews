@@ -5,5 +5,6 @@ urlpatterns= [
     path('filter',views.filter, name='search'),
     path('search',views.search, name='search'),
     # api url below
-    path('api', api_view.handle_api_request, name='api view' ),
+    path('api', api_view.handle_get_and_post, name='getview' ),
+    path('api/<int:id>', api_view.handle_update_and_delete, name='update view' ),
 ]
