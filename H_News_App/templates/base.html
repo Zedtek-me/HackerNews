@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>{%block title%}Hacker News app{%endblock%}</title>
+        <meta name="viewport" content="width= device-width, initial-scale= 1">
+        <meta http-equiv="X-UA Compatible">
+        <link rel="stylesheet" href="../static/css/style.css" type="text/css">
+        <link rel="icon" href="../static/img/logo.jpg" type="image/jpg">
+        <script src="https://kit.fontawesome.com/c676ebde69.js" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <header>
+            <a href="" id="logo"><img src="" alt="logo area"></a>
+            <ul class="large-screen">
+                <li><input type="search" name="search_query" value="" placeholder="search for news" id="search"></li><i class="fa-solid fa-magnifying-glass search"></i>
+                <li> 
+                    Filter by:
+                    <select name="filter" id="filter">
+                        <option value="general-stories"> General Stories</option>
+                        <option value="job-stories"> Job Stories</option>
+                    </select>
+                </li>
+            </ul>
+            <!-- mobile screen -->
+            <ul class="mobile-screen">
+                <li><input type="search" name="search_query" value="" placeholder="search for news"></li><i class="fa-solid fa-magnifying-glass search"></i>
+                <li> 
+                    Filter by:
+                    <select name="filter" id="filter">
+                        <option value="general-stories"> General Stories</option>
+                        <option value="job-stories"> Job Stories</option>
+                    </select>
+                </li>
+            </ul>
+            <!-- hamburger div for mobile -->
+            <div class="hamburger">
+                <div class=""></div>
+                <div class=""></div>
+                <div class=""></div>
+            </div>
+        </header>
+        
+        {% block content%}
+        <!-- contents based on the page comes in here -->
+        {%endblock%}
+    </body>
+    <footer>
+        <div class="foot-item">
+            <p id=""> Hi there</p>
+        </div>
+        <script src="../static/js/index.js"></script>
+    </footer>
+</html>

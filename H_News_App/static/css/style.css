@@ -1,0 +1,99 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'montserratt';
+    src: url();
+}
+
+html{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+header>*{
+    margin: 5px;
+}
+#logo{
+    text-decoration: none;
+    width: 30%;
+    height: 20%;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.large-screen{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    list-style: none;
+}
+.large-screen>*{
+    margin: 8px;
+}
+/* mobile starts here */
+.hamburger>*{
+    margin:3px;
+    height: 3px;
+    width: 20px;
+    background-color:aquamarine;
+}
+.hamburger{
+    display: none;
+    cursor: pointer;
+}
+.mobile-screen{
+    position: absolute;
+    top: 0;
+    right: 700px;
+    left: 0;
+    transition: all 1s ease-in-out;
+}
+
+.toggle-mobile{
+    right: 50px;
+}
+
+/* the news styling starts here */
+.news-flex-cont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.all-news{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-top:3%;
+    width: 80%;
+
+}
+
+.latest-news{
+    width: fit-content;
+    height: fit-content;
+    padding: 10%;
+    border-radius: 15px;
+}
