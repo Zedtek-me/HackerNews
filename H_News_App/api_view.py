@@ -17,19 +17,21 @@ def handle_get_and_post(request):
     elif request.method == 'POST':
         serializer= NewsSerializer(data=request.data)
         if serializer.is_valid(): 
-            return Response({"message": "your item was created. You can refresh now."}, status=status.HTTP_200_OK)
+            serializer.save()
+            return Response(data={"message": "your item was created. You can refresh now."}, status=status.HTTP_200_OK)
+        return Response({'invalid': 'The data you sent was incorrect or incomplete.'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
     
 
 
-# @api_view(['PUT','DELETE'])
-# def handle_update_and_delete(request, id):
-#     '''
-#     handles incoming update and delete requests
-#     '''
-#     if request.method == 'PUT':
-#         serializer= NewsSerializer(request.data)
-#         if serializer.is_valid(): 
-#             return Response({"message": "your item was created"}, status=status.HTTP_200_OK)
-#     return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['PUT','DELETE'])
+def handle_update_and_delete(request, id):
+    '''
+    handles incoming update and delete requests
+    '''
+    if request.method == 'PUT':
+        serializer= NewsSerializer(request.data)
+        if serializer.is_valid(): 
+            return Response({"message": "your item was created"}, status=status.HTTP_200_OK)
+    return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)

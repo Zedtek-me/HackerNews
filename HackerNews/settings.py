@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
+DATETIME_FORMAT='%Y-%m-%d %H:%M:%S'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -131,5 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # cron jobs below:
 CRONJOBS=[
-    ('*/5 * * * *', 'H_News_App.cron.get_latest_news')
+    ('*/5 * * * *', 'H_News_App.cron.story_url'),
+    ('*/5 * * * *', 'H_News_App.cron.ask_url'),
+    ('*/5 * * * *', 'H_News_App.cron.show_url'),
+    ('*/5 * * * *', 'H_News_App.cron.job_url')
 ]
