@@ -7,7 +7,7 @@
                 {%for item in data%}
                     <li id="list">
                         <div class="latest-news">
-                            <div class="news-title">Title: {{item.title}}</div>
+                            <p class="news-title">Title: {{item.title}}</p>
                             <p class="news-story">{%if item.text%}Story:{{item.text}}{%endif%}</p>
                             <p class="news-type">type:{{item.type}}</p>
                         </div>

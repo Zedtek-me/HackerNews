@@ -3,7 +3,9 @@ var token= document.cookie.split('=')[1]
 const filterFunction= ()=>{
     // get the needed element from frontend, including the filter icon; and other one to update the data with
     let filterSelection = document.querySelectorAll("#filter")
-    let [parentDiv,newsTitle, newsStory, newsType] = [document.querySelector('.latest-news'),document.querySelector('.news-title'), document.querySelector('.news-story'), document.querySelector('.news-type')]
+    var [parentDiv,newsTitle, newsStory, newsType] = [document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
+    console.log(newsTitle[0])
+    // loop through the filter icons to get both mobile and large screen, for their values
     for (let elem of filterSelection){
         elem.addEventListener('change', (e)=>{
         filteredBy=e.target.value
@@ -17,13 +19,16 @@ const filterFunction= ()=>{
         }).then((response)=>{return response.json()})
           .then(
             (data)=>{
-            for (let info of data){
-                newsTitle.innerHTML= info.title
-                newsStory.innerHTML= info.text
-                newsType.innerHTML= info.type
-                parentDiv.appendChild(newsTitle);
-                parentDiv.appendChild(newsStory)
-                parentDiv.appendChild(newsType)
+                console.log(data[0].fields.title)
+            // loop through the returned data, and update DOM accordingly
+            for (let info=0; info<data.length;info++){
+                newsTitle[info].innerHTML= data[info].fields.title
+                newsStory[info].innerHTML= data[info].fields.text
+                newsType[info].innerHTML= data[info].fields.type
+                parentDiv[info]+=`${newsTitle}\n
+                ${newsStory}\n
+                ${newsType}\n
+                `
             }
         })
     })}//for loop ends here

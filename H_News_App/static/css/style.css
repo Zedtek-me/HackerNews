@@ -93,7 +93,7 @@ header>*{
 
 .latest-news{
     background-color: aquamarine;
-    width:50%;
+    width:fit-content;
     height: 50%;
     padding:10px;
     margin: 5px;
