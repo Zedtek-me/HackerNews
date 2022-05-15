@@ -1,11 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.core import serializers
 from .models import News
 import json
-from .cron import story_url , show_url, ask_url,job_url
+# from .cron import story_url , show_url, ask_url,job_url
 # home page.
 def index(request):
-    news= News.objects.all()
+    news= News.objects.all()[:20]
     context= {'data' :news}
     # print([story_url, show_url, ask_url,job_url])
     return render(request, 'index.html', context)
@@ -17,14 +18,15 @@ def filter(request):
     # filter by the 'job news'
     if 'job' in filter_by:
         job_news= News.objects.filter(type='job')
-        jsonified_data=job_news
+        serialized_data= serializers.serialize('json',job_news)
+        jsonified_data= serialized_data
     
     # filter by general news
     else:
         generalStory_news= News.objects.filter(type='story')
-        jsonified_data=generalStory_news
-    return HttpResponse(jsonified_data)
-
+        serialized_data= serializers.serialize('json',generalStory_news)
+        jsonified_data= serialized_data
+    return HttpResponse(jsonified_data, content_type='application/json')
 # search function
 def search(request):
     search_item= json.loads(request.body)

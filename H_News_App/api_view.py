@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import News
 from .serializers import NewsSerializer
+from django.http import JsonResponse
+import json
 
 
 @api_view(['GET', 'POST'])
@@ -35,3 +37,4 @@ def handle_update_and_delete(request, id):
         if serializer.is_valid(): 
             return Response({"message": "your item was created"}, status=status.HTTP_200_OK)
     return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
+

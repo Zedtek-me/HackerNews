@@ -3,13 +3,17 @@
 {%block content%}
     <div class="news-flex-cont">
         <div class="all-news">
-            {%for item in data%}
-                <div class="latest-news">
-                   Title: <div class="news-title">{{item.title}}</div>
-                   Type:{{item.type}}
-                    {%if item.text%}Story:{{item.text}}{%endif%}
-                </div>
-            {%endfor%}
+            <ol id="list-container">
+                {%for item in data%}
+                    <li id="list">
+                        <div class="latest-news">
+                            <div class="news-title">Title: {{item.title}}</div>
+                            <p class="news-story">{%if item.text%}Story:{{item.text}}{%endif%}</p>
+                            <p class="news-type">type:{{item.type}}</p>
+                        </div>
+                    </li>
+                {%endfor%}
+            </ol>
         </div>
     </div>
 {%endblock%}
