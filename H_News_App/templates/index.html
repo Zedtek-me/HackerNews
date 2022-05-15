@@ -6,7 +6,8 @@
             {%for item in data%}
                 <div class="latest-news">
                    Title: <div class="news-title">{{item.title}}</div>
-                    {%if item.text%}Story:item.text{%endif%}
+                   Type:{{item.type}}
+                    {%if item.text%}Story:{{item.text}}{%endif%}
                 </div>
             {%endfor%}
         </div>

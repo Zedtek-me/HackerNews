@@ -17,24 +17,24 @@ class NewsItems:
         # as stated in the api doc, the latest items start from the max downward. So, get the latets 100 news as directed.
         item_max_id.reverse()
         items_from_latest= item_max_id[:100]
-        print(len(items_from_latest))
         print(items_from_latest)
         # loop through each news item to get their properties, and store in the database, as directed.
         for item in items_from_latest:
             print(item)
-            news= requests.get(f'https://hacker-news.firebaseio.com/v0/item/{item}.json?print=pretty').json()
+            news=requests.get(f'https://hacker-news.firebaseio.com/v0/item/{item}.json?print=pretty').json()
             print(news)
             try:
-                db_news= News.objects.update_or_create(**news)
+                db_news=News.objects.create(**news)
                 print(f"{news.get('by')}, was saved in the db")
             except Exception as err:
-                raise(err)
+                pass
         print('all items saved up')
 
 top_stories= NewsItems('https://hacker-news.firebaseio.com/v0/topstories.json')
 ask_stories= NewsItems('https://hacker-news.firebaseio.com/v0/askstories.json')
 show_stories= NewsItems('https://hacker-news.firebaseio.com/v0/showstories.json')
 job_stories= NewsItems('https://hacker-news.firebaseio.com/v0/jobstories.json')
+
 story_url= top_stories.get_latest_news()
 ask_url= ask_stories.get_latest_news()
 show_url=show_stories.get_latest_news()

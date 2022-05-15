@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import News
 import json
-# from .cron import story_url, show_url, ask_url,job_url
+from .cron import story_url , show_url, ask_url,job_url
 # home page.
 def index(request):
     news= News.objects.all()
