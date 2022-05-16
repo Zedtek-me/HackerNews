@@ -75,6 +75,11 @@ header>*{
 }
 
 /* the news styling starts here */
+.heading{/*hackernews heading*/
+    margin: auto;
+    font-weight: 700;
+    align-self: center;
+}
 .news-flex-cont{
     display: flex;
     flex-direction: column;
@@ -129,5 +134,5 @@ header>*{
 #story-url{
     text-decoration: none;
     color: white;
-    
+    cursor: pointer;    
 }

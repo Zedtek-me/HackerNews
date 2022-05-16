@@ -40,14 +40,14 @@ const getNewsFromDb=(url)=>{
             listContainer.appendChild(orderedList)
         }//end of loop
     })
+    
 }
 
-getNewsFromDb('http://127.0.0.1:7000/api')
+getNewsFromDb("/api")
 // function for filtering news
 const filterFunction= ()=>{
     // get the needed element from frontend, including the filter widgets; and other one to update the data with
     let filterSelection = document.querySelectorAll("#filter")
-    var [parentDiv, newsTitle, newsStory, newsType] = [document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
     // loop through the filter widgets to get both mobile and large screen, for their values
     for (let elem of filterSelection){
         elem.addEventListener('change', (e)=>{
@@ -62,6 +62,8 @@ const filterFunction= ()=>{
         }).then((response)=>{return response.json()})
           .then(
             (data)=>{
+            var [parentDiv, newsTitle, newsStory, newsType] = [document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
+            console.log([parentDiv[0], newsTitle[0], newsStory[0], newsType[0]])
             // loop through the returned data, and update DOM accordingly
             for (let info=0; info<data.length;info++){
                 newsTitle[info].textContent= data[info].fields.title
