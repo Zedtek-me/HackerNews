@@ -13,6 +13,7 @@ def index(request):
 def filter(request):
     jsonified_data=None
     filter_by = json.loads(request.body)
+    print(filter_by)
     # filter by the 'job news'
     if 'job' in filter_by:
         job_news= News.objects.filter(type='job')

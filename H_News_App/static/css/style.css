@@ -136,3 +136,8 @@ header>*{
     color: white;
     cursor: pointer;    
 }
+.read-more{
+    font-weight: 500;
+    font-size:13px;
+    cursor: pointer;
+}
