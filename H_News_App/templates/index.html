@@ -1,19 +1,22 @@
 {% extends 'base.html'%}
 
 {%block content%}
+    <div class="news-from-backend" style="display: none;">{{data}}</div>
     <div class="news-flex-cont">
         <div class="all-news">
             <ol id="list-container">
-                {%for item in data%}
-                    <li id="list">
-                        <div class="latest-news">
-                            <p class="news-title">Title: {{item.title}}</p>
-                            <p class="news-story">{%if item.text%}Story:{{item.text}}{%endif%}</p>
-                            <p class="news-type">type:{{item.type}}</p>
-                        </div>
-                    </li>
-                {%endfor%}
+                
             </ol>
         </div>
     </div>
 {%endblock%}
+
+<!-- <li id="list">
+    <div class="latest-news">
+        <p class="news-title">Title: {{item.title}}</p>
+        <div class="item-details">
+            <a href="{{item.url}}" id="story-url" class="news-story">Link</a>
+            <p class="news-type">type: <h3 id="type-txt">{{item.type}}</h3></p>
+        </div>
+    </div>
+</li> -->

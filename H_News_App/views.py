@@ -6,10 +6,8 @@ import json
 # from .cron import story_url , show_url, ask_url,job_url
 # home page.
 def index(request):
-    news= News.objects.all()[:20]
-    context= {'data' :news}
     # print([story_url, show_url, ask_url,job_url])
-    return render(request, 'index.html', context)
+    return render(request, 'index.html', context={})
 
 #  Handle fileter function: I 
 def filter(request):
