@@ -131,6 +131,12 @@ header>*{
     margin: 5px;
 }
 
+.news-story{
+    text-decoration: none;
+    color: white;
+    cursor: pointer;    
+}
+
 #story-url{
     text-decoration: none;
     color: white;
