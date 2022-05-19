@@ -8,6 +8,7 @@ const getNewsFromDb=(url)=>{
     fetch(url)
     .then((response)=>{return response.json()})
     .then((allData)=>{
+        // the two intervals below help to track the stop and start intervals of the sliced data
         staticInterval= 20
         growingInterval= 20
         // slice the data to display the first 20 items
@@ -42,7 +43,7 @@ const getNewsFromDb=(url)=>{
             newsParentContainer.appendChild(itemDetails)
             orderedList.appendChild(newsParentContainer)
             listContainer.appendChild(orderedList)
-        }//end of loop
+        }//end of initial loop
 
         // for the click more button: 1. create an inital interval set to zero; 2. when read-more is clicked, increase both initial interval and growing interval by the static interval-- 20; 3. slice allData by the initial and the growing interval
         initialInterval=0
@@ -70,7 +71,7 @@ const getNewsFromDb=(url)=>{
             newsStory.setAttribute('id', 'story-url')
             newsType.setAttribute('class', 'news-type')
             
-            // now pass in data from the api
+            // now pass in data from the sliced data
             newsTitle.textContent= newData[newCount].title;
             newsStory.url= newData[newCount].url;
             newsType.textContent= newData[newCount].type;
@@ -98,8 +99,9 @@ const filterFunction= ()=>{
     // loop through the filter widgets to get both mobile and large screen, for their values
     for (let elem of filterSelection){
         elem.addEventListener('change', (e)=>{
-        filteredBy=e.target.value
-        fetch('/filter',{
+        filteredBy=e.target.value//gets the filtered item value
+        
+        fetch('/filter',{// makes a request to the server to filter by the value
             method: 'POST',
             body:JSON.stringify(filteredBy),
             'headers': {
@@ -109,20 +111,30 @@ const filterFunction= ()=>{
         }).then((response)=>{return response.json()})
           .then(
             (data)=>{
-            var [parentDiv, newsTitle, newsStory, newsType] = [document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
-            console.log([parentDiv[0], newsTitle[0], newsStory[0], newsType[0]])
+            var [listContainer, orderedList, parentDiv, newsTitle, newsStory, newsType] = [document.querySelector('#list-container'), document.querySelectorAll('#list'), document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
+            
+            // removing other elements if present element number is greater than the filtered data
+            if(orderedList.length > data.length){
+                orderedList=Array.from(orderedList)
+                var slicedFilter= orderedList.slice(data.length)
+                for(item of slicedFilter){
+                    listContainer.removeChild(item)
+                    console.log(`${item} removed from the list.`)
+                }
+            }
             // loop through the returned data, and update DOM accordingly
             for (let info=0; info<data.length;info++){
                 newsTitle[info].textContent= data[info].fields.title
-                if(!data[info].fields.url){newsStory[info].url=''}//do this to set empty link for none available urls, for now
+                if(!data[info].fields.url){newsStory[info].url=''}
+                else{newsStory[info].url= data[info].fields.url}//do this to set empty link for none available urls, for now
                 newsType[info].textContent= 'Type: ' + data[info].fields.type;
                 parentDiv[info]+=`${newsTitle}\n
                 ${newsStory}\n
                 ${newsType}\n
                 `
-            }
+            }//loop for the filtered data insertion ends here.
         })
-    })}//for loop ends here
+    })}//for-loop for the fiflter buttons ends here
 }
 
 filterFunction()
