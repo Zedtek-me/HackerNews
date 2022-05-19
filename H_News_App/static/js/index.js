@@ -126,17 +126,52 @@ const filterFunction= ()=>{
                 // get the current list items and insert the data accordingly
                 let currentListItems= document.querySelectorAll('#list')
                 console.log(currentListItems.length)
-                for (let info=0; info<currentListItems.length;info++){
-                    newsTitle[info].textContent= data[info].fields.title
-                    if(!data[info].fields.url){newsStory[info].url=''}
-                    else{newsStory[info].url= data[info].fields.url}//do this to set empty link for none available urls, for now
-                    newsType[info].textContent= 'Type: ' + data[info].fields.type;
-                    parentDiv[info]+=`${newsTitle}\n
-                    ${newsStory}\n
-                    ${newsType}\n
-                    `
-                }
+                // for (let info=0; info<currentListItems.length;info++){
+                //     newsTitle[info].textContent= data[info].fields.title
+                //     if(!data[info].fields.url){newsStory[info].url=''}
+                //     else{newsStory[info].url= data[info].fields.url}//do this to set empty link for none available urls, for now
+                //     newsType[info].textContent= 'Type: ' + data[info].fields.type;
+                //     parentDiv[info]+=`${newsTitle}\n
+                //     ${newsStory}\n
+                //     ${newsType}\n
+                //     `
+                // }
             }
+
+            // creating elements if the data sent is larger than current elements
+            else if (data.length > orderedList.length){
+                // creates the required elements belows
+                for(let count= 0; count<data.length;count++){
+
+                    let orderedList= document.createElement('li')
+                    let newsParentContainer= document.createElement('div')
+                    let newsTitle= document.createElement('p')
+                    let itemDetails= document.createElement('div')
+                    let newsStory= document.createElement('a')
+                    let newsType=  document.createElement('p')
+
+                    // set the element's respective attributes below
+                    orderedList.setAttribute('id', 'list')
+                    newsParentContainer.setAttribute('class','latest-news')
+                    newsTitle.setAttribute('class', 'news-title')
+                    itemDetails.setAttribute('class', 'item-details')
+                    newsStory.setAttribute('class', 'news-story')
+                    newsStory.setAttribute('id', 'story-url')
+                    newsType.setAttribute('class', 'news-type')
+                    
+                    // now pass in data from the api
+                    newsTitle.textContent= data[count].fields.title;
+                    newsStory.url= data[count].fields.url;
+                    newsType.textContent= data[count].fields.type;
+                    // append to their respective parents
+                    newsParentContainer.appendChild(newsTitle)
+                    itemDetails.appendChild(newsStory)
+                    itemDetails.appendChild(newsType)
+                    newsParentContainer.appendChild(itemDetails)
+                    orderedList.appendChild(newsParentContainer)
+                    listContainer.appendChild(orderedList)
+                    }
+                }
             // loop through the returned data, and update DOM accordingly
             for (let info=0; info<data.length;info++){
                 newsTitle[info].textContent= data[info].fields.title
