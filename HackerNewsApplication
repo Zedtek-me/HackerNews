@@ -1,0 +1,6 @@
+# News
+HackerNews App. It's aimed at serving real-time news from Hackernews to users of the app.
+Other features that ship with this app include the ability to filter based on the type of news you want; search for news based on some random texts: if the news of similar exists, 
+it returns the news.
+
+<img src='./static/img/default.jpg'>
