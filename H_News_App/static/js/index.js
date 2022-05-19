@@ -113,13 +113,28 @@ const filterFunction= ()=>{
             (data)=>{
             var [listContainer, orderedList, parentDiv, newsTitle, newsStory, newsType] = [document.querySelector('#list-container'), document.querySelectorAll('#list'), document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
             
-            // removing other elements if present element number is greater than the filtered data
+            // removing other elements if the present element number is greater than the filtered data
             if(orderedList.length > data.length){
-                orderedList=Array.from(orderedList)
+                console.log(orderedList.length)
+                orderedList=Array.from(orderedList)//converts the entire NodeList to an Array for slicing
                 var slicedFilter= orderedList.slice(data.length)
-                for(item of slicedFilter){
+                for(item of slicedFilter){//loops through the remaining items after the slice, to remove them from their parent.
                     listContainer.removeChild(item)
                     console.log(`${item} removed from the list.`)
+                }
+                
+                // get the current list items and insert the data accordingly
+                let currentListItems= document.querySelectorAll('#list')
+                console.log(currentListItems.length)
+                for (let info=0; info<currentListItems.length;info++){
+                    newsTitle[info].textContent= data[info].fields.title
+                    if(!data[info].fields.url){newsStory[info].url=''}
+                    else{newsStory[info].url= data[info].fields.url}//do this to set empty link for none available urls, for now
+                    newsType[info].textContent= 'Type: ' + data[info].fields.type;
+                    parentDiv[info]+=`${newsTitle}\n
+                    ${newsStory}\n
+                    ${newsType}\n
+                    `
                 }
             }
             // loop through the returned data, and update DOM accordingly
