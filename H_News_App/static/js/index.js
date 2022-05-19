@@ -141,6 +141,8 @@ const filterFunction= ()=>{
             // creating elements if the data sent is larger than current elements
             else if (data.length > orderedList.length){
                 // creates the required elements belows
+                
+                // before creating these items, remove the previous elements from the DOM or you start creating from the last item in the DOM, to avoid unwanted data and behaviour (Do this tomorrow!)
                 for(let count= 0; count<data.length;count++){
 
                     let orderedList= document.createElement('li')
