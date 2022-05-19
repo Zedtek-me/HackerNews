@@ -44,15 +44,47 @@ const getNewsFromDb=(url)=>{
             listContainer.appendChild(orderedList)
         }//end of loop
 
-        // click more button
+        // for the click more button: 1. create an inital interval set to zero; 2. when read-more is clicked, increase both initial interval and growing interval by the static interval-- 20; 3. slice allData by the initial and the growing interval
         initialInterval=0
         readMoreBtn.addEventListener('click', (e)=>{
             initialInterval+= staticInterval
             growingInterval+=staticInterval
-            newData=allData.slice(initialInterval, growingInterval)
-            // initialDataLength += staticInterval
+            let newData=allData.slice(initialInterval, growingInterval)
 
-            console.log(`length of actual data: ${newData.length}; how inteval grows: ${growingInterval}; tracker of data length ${initialInterval}`)
+            // looping through to display, just as the initial items
+            for(let newCount= 0; newCount<newData.length;newCount++){
+            // create elements
+            let orderedList= document.createElement('li')
+            let newsParentContainer= document.createElement('div')
+            let newsTitle= document.createElement('p')
+            let itemDetails= document.createElement('div')
+            let newsStory= document.createElement('a')
+            let newsType=  document.createElement('p')
+
+            // set the element's respective attributes below
+            orderedList.setAttribute('id', 'list')
+            newsParentContainer.setAttribute('class','latest-news')
+            newsTitle.setAttribute('class', 'news-title')
+            itemDetails.setAttribute('class', 'item-details')
+            newsStory.setAttribute('class', 'news-story')
+            newsStory.setAttribute('id', 'story-url')
+            newsType.setAttribute('class', 'news-type')
+            
+            // now pass in data from the api
+            newsTitle.textContent= newData[newCount].title;
+            newsStory.url= newData[newCount].url;
+            newsType.textContent= newData[newCount].type;
+            // append to their respective parents
+            newsParentContainer.appendChild(newsTitle)
+            itemDetails.appendChild(newsStory)
+            itemDetails.appendChild(newsType)
+            newsParentContainer.appendChild(itemDetails)
+            orderedList.appendChild(newsParentContainer)
+            listContainer.appendChild(orderedList)
+            }
+            if(newData.length<20){
+                readMoreBtn.textContent= 'End of Items.'
+            }
         })
     })
     
