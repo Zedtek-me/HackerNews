@@ -1,13 +1,17 @@
 var token= document.cookie.split('=')[1]
+var newsFromDb= []
 
 // getting all news from the database
 const getNewsFromDb=(url)=>{
     let listContainer= document.querySelector('#list-container')
+    let readMoreBtn= document.querySelector('.read-more')
     fetch(url)
     .then((response)=>{return response.json()})
-    .then((data)=>{
+    .then((allData)=>{
+        staticInterval= 20
+        growingInterval= 20
         // slice the data to display the first 20 items
-        data= data.slice(0, 20)
+        data= allData.slice(0,growingInterval)
         // loop through the data, to dynamically create elements needed and pass in their respective attributes and contents
         for(let count= 0; count<data.length;count++){
             // create elements
@@ -26,7 +30,7 @@ const getNewsFromDb=(url)=>{
             newsStory.setAttribute('class', 'news-story')
             newsStory.setAttribute('id', 'story-url')
             newsType.setAttribute('class', 'news-type')
-
+            
             // now pass in data from the api
             newsTitle.textContent= data[count].title;
             newsStory.url= data[count].url;
@@ -39,6 +43,17 @@ const getNewsFromDb=(url)=>{
             orderedList.appendChild(newsParentContainer)
             listContainer.appendChild(orderedList)
         }//end of loop
+
+        // click more button
+        initialInterval=0
+        readMoreBtn.addEventListener('click', (e)=>{
+            initialInterval+= staticInterval
+            growingInterval+=staticInterval
+            newData=allData.slice(initialInterval, growingInterval)
+            // initialDataLength += staticInterval
+
+            console.log(`length of actual data: ${newData.length}; how inteval grows: ${growingInterval}; tracker of data length ${initialInterval}`)
+        })
     })
     
 }
@@ -68,12 +83,11 @@ const filterFunction= ()=>{
             for (let info=0; info<data.length;info++){
                 newsTitle[info].textContent= data[info].fields.title
                 if(!data[info].fields.url){newsStory[info].url=''}//do this to set empty link for none available urls, for now
-                newsType[info].textContent= 'Type: ' + data[info].fields.type
+                newsType[info].textContent= 'Type: ' + data[info].fields.type;
                 parentDiv[info]+=`${newsTitle}\n
                 ${newsStory}\n
                 ${newsType}\n
                 `
-                console.log(data[info].fields.url)
             }
         })
     })}//for loop ends here
