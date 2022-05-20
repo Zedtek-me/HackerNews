@@ -141,7 +141,10 @@ const filterFunction= ()=>{
             // creating elements if the data sent is larger than current elements
             else if (data.length > orderedList.length){
                 // creates the required elements belows
-                
+                for(item of orderedList){//loops through the list elements to remove them from their parent, before inserting a the new data.
+                    listContainer.removeChild(item)
+                    console.log(`${item} removed from the Dom.`)
+                }
                 // before creating these items, remove the previous elements from the DOM or you start creating from the last item in the DOM, to avoid unwanted data and behaviour (Do this tomorrow!)
                 for(let count= 0; count<data.length;count++){
 
