@@ -116,24 +116,17 @@ const filterFunction= ()=>{
             
             // removing other elements if the present element number is greater than the filtered data
             if(orderedList.length > data.length){
-                console.log(orderedList.length)
                 orderedList=Array.from(orderedList)//converts the entire NodeList to an Array for slicing
                 var slicedFilter= orderedList.slice(data.length)
                 for(item of slicedFilter){//loops through the remaining items after the slice, to remove them from their parent.
                     listContainer.removeChild(item)
-                    console.log(`${item} removed from the list.`)
                 }
-                
-                // get the current list items and insert the data accordingly
-                let currentListItems= document.querySelectorAll('#list')
-                console.log(currentListItems.length)
             }
 
             // creating elements if the data sent is larger than current elements
             else if (data.length > orderedList.length){
                 for(item of orderedList){//loops through the list elements to remove them from their parent, before inserting a the new data.
                     listContainer.removeChild(item)
-                    console.log(`${item} removed from the Dom.`)
                 }
                 // creates the required elements belows
                 for(let count= 0; count<data.length;count++){
