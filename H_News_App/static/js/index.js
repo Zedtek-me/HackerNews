@@ -1,10 +1,10 @@
 var token= document.cookie.split('=')[1]
-var newsFromDb= []
 
 // getting all news from the database
 const getNewsFromDb=(url)=>{
     let listContainer= document.querySelector('#list-container')
     let readMoreBtn= document.querySelector('.read-more')
+
     fetch(url)
     .then((response)=>{return response.json()})
     .then((allData)=>{
@@ -94,8 +94,9 @@ const getNewsFromDb=(url)=>{
 getNewsFromDb("/api")
 // function for filtering news
 const filterFunction= ()=>{
-    // get the needed element from frontend, including the filter widgets; and other one to update the data with
+    // get the filter and read-more elements from frontend
     let filterSelection = document.querySelectorAll("#filter")
+    let readMoreBtn= document.querySelector('.read-more')
     // loop through the filter widgets to get both mobile and large screen, for their values
     for (let elem of filterSelection){
         elem.addEventListener('change', (e)=>{
@@ -126,26 +127,15 @@ const filterFunction= ()=>{
                 // get the current list items and insert the data accordingly
                 let currentListItems= document.querySelectorAll('#list')
                 console.log(currentListItems.length)
-                // for (let info=0; info<currentListItems.length;info++){
-                //     newsTitle[info].textContent= data[info].fields.title
-                //     if(!data[info].fields.url){newsStory[info].url=''}
-                //     else{newsStory[info].url= data[info].fields.url}//do this to set empty link for none available urls, for now
-                //     newsType[info].textContent= 'Type: ' + data[info].fields.type;
-                //     parentDiv[info]+=`${newsTitle}\n
-                //     ${newsStory}\n
-                //     ${newsType}\n
-                //     `
-                // }
             }
 
             // creating elements if the data sent is larger than current elements
             else if (data.length > orderedList.length){
-                // creates the required elements belows
                 for(item of orderedList){//loops through the list elements to remove them from their parent, before inserting a the new data.
                     listContainer.removeChild(item)
                     console.log(`${item} removed from the Dom.`)
                 }
-                // before creating these items, remove the previous elements from the DOM or you start creating from the last item in the DOM, to avoid unwanted data and behaviour (Do this tomorrow!)
+                // creates the required elements belows
                 for(let count= 0; count<data.length;count++){
 
                     let orderedList= document.createElement('li')
@@ -177,6 +167,9 @@ const filterFunction= ()=>{
                     listContainer.appendChild(orderedList)
                     }
                 }
+            
+            // remove the read more button after a filter.
+            readMoreBtn.style.display= 'none'
             // loop through the returned data, and update DOM accordingly
             for (let info=0; info<data.length;info++){
                 newsTitle[info].textContent= data[info].fields.title
