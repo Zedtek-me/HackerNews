@@ -34,8 +34,12 @@ const getNewsFromDb=(url)=>{
             
             // now pass in data from the api
             newsTitle.textContent= data[count].title;
-            newsStory.url= data[count].url;
+            newsStory.href= data[count].url;
+            newsStory.textContent= 'Link'
             newsType.textContent= data[count].type;
+            
+            console.log(newsStory)
+
             // append to their respective parents
             newsParentContainer.appendChild(newsTitle)
             itemDetails.appendChild(newsStory)
@@ -73,7 +77,8 @@ const getNewsFromDb=(url)=>{
             
             // now pass in data from the sliced data
             newsTitle.textContent= newData[newCount].title;
-            newsStory.url= newData[newCount].url;
+            newsStory.href= newData[newCount].url;
+            newsStory.textContent= 'Link'
             newsType.textContent= newData[newCount].type;
             // append to their respective parents
             newsParentContainer.appendChild(newsTitle)
@@ -149,7 +154,8 @@ const filterFunction= ()=>{
                     
                     // now pass in data from the api
                     newsTitle.textContent= data[count].fields.title;
-                    newsStory.url= data[count].fields.url;
+                    newsStory.href= data[count].fields.url;
+                    newsStory.textContent= 'Link'
                     newsType.textContent= data[count].fields.type;
                     // append to their respective parents
                     newsParentContainer.appendChild(newsTitle)
