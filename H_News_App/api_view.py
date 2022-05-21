@@ -33,8 +33,9 @@ def handle_update_and_delete(request, id):
     handles incoming update and delete requests
     '''
     if request.method == 'PUT':
-        serializer= NewsSerializer(request.data)
-        if serializer.is_valid(): 
-            return Response({"message": "your item was created"}, status=status.HTTP_200_OK)
+        # check whether you could use the PUT attribute on the request object...
+        data_for_update= News.objects.filter(id=id)
+        serializer= NewsSerializer(data_for_update)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     return Response(data={"invalid":"invalid request at this endpoint"}, status=status.HTTP_400_BAD_REQUEST)
 

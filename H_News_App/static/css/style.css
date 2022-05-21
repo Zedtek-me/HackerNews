@@ -3,7 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: poppins;
-    font-weight: lighter;
+    font-weight: 12px;
 }
 
 @font-face {
@@ -30,6 +30,8 @@ header{
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    color: white;
+    background-color: rgb(206, 62, 10);
 }
 header>*{
     margin: 5px;
@@ -53,25 +55,42 @@ header>*{
 }
 /* mobile starts here */
 .hamburger>*{
-    margin:3px;
+    margin:2px;
     height: 3px;
     width: 20px;
     background-color:aquamarine;
 }
 .hamburger{
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 .mobile-screen{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    height: 200px;
+    padding: 20px;
+    color: black;
+    list-style: none;
     position: absolute;
     top: 0;
-    right: 700px;
-    left: 0;
+    left: -9;
+    right: 800px;
     transition: all 1s ease-in-out;
+    background-color: aquamarine;
+    border: solid 2px rgb(206, 62, 10);
 }
-
+#mobile-filter{
+    display: flex;
+    flex-direction: column;
+}
 .toggle-mobile{
-    right: 50px;
+    right: 140px;
 }
 
 /* the news styling starts here */
@@ -86,6 +105,7 @@ header>*{
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 50px;
 }
 .all-news{
     display: flex;
@@ -146,4 +166,47 @@ header>*{
     font-weight: 500;
     font-size:13px;
     cursor: pointer;
+}
+
+footer, .foot-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    margin-top: 15px;
+}
+
+#socials{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    padding: 10px;
+}
+
+#socials> i{
+    margin-right: -8px;
+    margin-left: 5px;
+}
+#linkedinlink, #whatsapp{
+    text-decoration: none;
+    color: green;
+    margin: 10px;
+}
+
+/* media queries */
+
+@media screen and (max-width: 650px){
+    .hamburger{
+        display: flex;
+    }
+
+    .large-screen{
+        display: none;
+    }
+
+    .mobile-screen{
+        display: flex;
+    }
 }

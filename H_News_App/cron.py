@@ -14,11 +14,11 @@ class NewsItems:
         '''
         # getting all items, from the url below, as stipulated in the api doc.
         item_max_id= requests.get('%s'%self.url).json()
-        # as stated in the api doc, the latest items start from the max downward. So, get the latets 100 news as directed.
+        # as stated in the api doc, the latest items start from the max downward. So, get the latets 100 news.
         item_max_id.reverse()
         items_from_latest= item_max_id[:100]
         print(items_from_latest)
-        # loop through each news item to get their properties, and store in the database, as directed.
+        # loop through each news item to get their properties, and store in the database.
         for item in items_from_latest:
             print(item)
             news=requests.get(f'https://hacker-news.firebaseio.com/v0/item/{item}.json?print=pretty').json()

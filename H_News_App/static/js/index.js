@@ -1,5 +1,15 @@
-var token= document.cookie.split('=')[1]
+var token= document.cookie.split('=')[1]// for csrf-token
+let [hamBurgerDiv, mobileMenu]= [document.querySelector('.hamburger'), document.querySelector('.mobile-screen')]
 
+//toggle the mobile display
+const mobileToggle= (hamburger, menu)=>{
+    hamburger.addEventListener(
+        'click', (e)=>{
+        menu.classList.toggle('toggle-mobile')})
+}
+
+
+mobileToggle(hamBurgerDiv, mobileMenu)
 // getting all news from the database
 const getNewsFromDb=(url)=>{
     let listContainer= document.querySelector('#list-container')
@@ -38,7 +48,7 @@ const getNewsFromDb=(url)=>{
             newsStory.textContent= 'Link'
             newsType.textContent= data[count].type;
             
-            console.log(newsStory)
+            // console.log(newsStory)
 
             // append to their respective parents
             newsParentContainer.appendChild(newsTitle)
