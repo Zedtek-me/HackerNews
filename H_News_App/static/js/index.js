@@ -223,7 +223,9 @@ const search= ()=>{
                     'X-CSRFToken': token,
                     'Content-Type': 'application/json'
                 }
-            })//end of fetch
+            })
+            .then((response)=> {return response.json()})
+            .then((data)=>{console.log(data)})
         })//end of listener
     }
 }

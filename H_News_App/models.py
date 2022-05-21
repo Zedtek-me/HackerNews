@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import CharField
 from django.core.validators import int_list_validator
 # the News table
 class News(models.Model):
