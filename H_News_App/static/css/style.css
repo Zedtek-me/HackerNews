@@ -89,6 +89,10 @@ header>*{
     display: flex;
     flex-direction: column;
 }
+
+#mobile-search>*{
+    margin: 4px;
+}
 .toggle-mobile{
     right: 140px;
 }
