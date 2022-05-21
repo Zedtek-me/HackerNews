@@ -89,8 +89,12 @@ header>*{
     display: flex;
     flex-direction: column;
 }
-
-#mobile-search>*{
+#large-screen-search{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#mobile-search>*, #large-screen-search>*{
     margin: 4px;
 }
 .toggle-mobile{

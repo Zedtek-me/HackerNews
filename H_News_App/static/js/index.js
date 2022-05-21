@@ -46,7 +46,7 @@ const getNewsFromDb=(url)=>{
             newsTitle.textContent= data[count].title;
             newsStory.href= data[count].url;
             newsStory.textContent= 'Link'
-            newsType.textContent= data[count].type;
+            newsType.textContent= 'Type: ' +data[count].type;
             
             // console.log(newsStory)
 
@@ -89,7 +89,7 @@ const getNewsFromDb=(url)=>{
             newsTitle.textContent= newData[newCount].title;
             newsStory.href= newData[newCount].url;
             newsStory.textContent= 'Link'
-            newsType.textContent= newData[newCount].type;
+            newsType.textContent= 'Type: ' + newData[newCount].type;
             // append to their respective parents
             newsParentContainer.appendChild(newsTitle)
             itemDetails.appendChild(newsStory)
@@ -166,7 +166,7 @@ const filterFunction= ()=>{
                     newsTitle.textContent= data[count].fields.title;
                     newsStory.href= data[count].fields.url;
                     newsStory.textContent= 'Link'
-                    newsType.textContent= data[count].fields.type;
+                    newsType.textContent= 'Type: ' + data[count].fields.type;
                     // append to their respective parents
                     newsParentContainer.appendChild(newsTitle)
                     itemDetails.appendChild(newsStory)

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core import serializers
 from .models import News
+from django.db.models import Q
 import json
 # from .cron import story_url , show_url, ask_url,job_url
 # home page.
@@ -28,7 +29,8 @@ def filter(request):
     return HttpResponse(jsonified_data, content_type='application/json')
 # search function
 def search(request):
-    search_item= json.loads(request.body)
+    search_query= json.loads(request.body)
+    search_item= Q(text__icontains=search_query)
     print(search_item)
     return HttpResponse('')
 
