@@ -29,11 +29,11 @@ def filter(request):
     return HttpResponse(jsonified_data, content_type='application/json')
 # search function
 def search(request):
+    search= ''
     search_query= json.loads(request.body)
     search_items= News.objects.filter(Q(text__icontains=search_query))
     if search_items:
         search= serializers.serialize('json', search_items)
+    else:
+        search= json.dumps(f"Nothing was found for '{search_query}'")
     return HttpResponse(search, content_type='application/json')
-
-
-
