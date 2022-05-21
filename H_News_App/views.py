@@ -30,8 +30,9 @@ def filter(request):
 # search function
 def search(request):
     search_query= json.loads(request.body)
-    search_item= Q(text__icontains=search_query)
-    print(search_item)
+    search_item= News.objects.filter(Q(text__icontains=search_query))
+    for news in search_item:
+        print(news.text + '\n\n\n')
     return HttpResponse('')
 
 
