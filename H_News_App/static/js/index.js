@@ -32,6 +32,7 @@ const getNewsFromDb=(url)=>{
             let itemDetails= document.createElement('div')
             let newsStory= document.createElement('a')
             let newsType=  document.createElement('p')
+            let postedOn= document.createElement('p')
 
             // set the element's respective attributes below
             orderedList.setAttribute('id', 'list')
@@ -41,12 +42,14 @@ const getNewsFromDb=(url)=>{
             newsStory.setAttribute('class', 'news-story')
             newsStory.setAttribute('id', 'story-url')
             newsType.setAttribute('class', 'news-type')
+            postedOn.setAttribute('id', 'post-time')
             
             // now pass in data from the api
             newsTitle.textContent= data[count].title;
             newsStory.href= data[count].url;
             newsStory.textContent= 'Link'
-            newsType.textContent= 'Type: ' +data[count].type;
+            newsType.textContent= '| Type: ' +data[count].type;
+            postedOn.textContent= '| Time posted: ' + data[count].time
             
             // console.log(newsStory)
 
@@ -54,6 +57,7 @@ const getNewsFromDb=(url)=>{
             newsParentContainer.appendChild(newsTitle)
             itemDetails.appendChild(newsStory)
             itemDetails.appendChild(newsType)
+            itemDetails.appendChild(postedOn)
             newsParentContainer.appendChild(itemDetails)
             orderedList.appendChild(newsParentContainer)
             listContainer.appendChild(orderedList)
@@ -75,6 +79,7 @@ const getNewsFromDb=(url)=>{
             let itemDetails= document.createElement('div')
             let newsStory= document.createElement('a')
             let newsType=  document.createElement('p')
+            let postedOn= document.createElement('p')
 
             // set the element's respective attributes below
             orderedList.setAttribute('id', 'list')
@@ -84,16 +89,19 @@ const getNewsFromDb=(url)=>{
             newsStory.setAttribute('class', 'news-story')
             newsStory.setAttribute('id', 'story-url')
             newsType.setAttribute('class', 'news-type')
+            postedOn.setAttribute('id', 'post-time')
             
             // now pass in data from the sliced data
             newsTitle.textContent= newData[newCount].title;
             newsStory.href= newData[newCount].url;
             newsStory.textContent= 'Link'
-            newsType.textContent= 'Type: ' + newData[newCount].type;
+            newsType.textContent= '| Type: ' + newData[newCount].type;
+            postedOn.textContent= '| Time posted: ' +newData[newCount].time
             // append to their respective parents
             newsParentContainer.appendChild(newsTitle)
             itemDetails.appendChild(newsStory)
             itemDetails.appendChild(newsType)
+            itemDetails.appendChild(postedOn)
             newsParentContainer.appendChild(itemDetails)
             orderedList.appendChild(newsParentContainer)
             listContainer.appendChild(orderedList)
@@ -127,7 +135,7 @@ const filterFunction= ()=>{
         }).then((response)=>{return response.json()})
           .then(
             (data)=>{
-            var [listContainer, orderedList, parentDiv, newsTitle, newsStory, newsType] = [document.querySelector('#list-container'), document.querySelectorAll('#list'), document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type')]
+            var [listContainer, orderedList, parentDiv, newsTitle, newsStory, newsType] = [document.querySelector('#list-container'), document.querySelectorAll('#list'), document.querySelectorAll('.latest-news'), document.querySelectorAll('.news-title'), document.querySelectorAll('.news-story'), document.querySelectorAll('.news-type'), document.querySelectorAll('#post-time')]
             
             // removing other elements if the present element number is greater than the filtered data
             if(orderedList.length > data.length){
@@ -152,6 +160,7 @@ const filterFunction= ()=>{
                     let itemDetails= document.createElement('div')
                     let newsStory= document.createElement('a')
                     let newsType=  document.createElement('p')
+                    let postedOn= document.createElement('p')
 
                     // set the element's respective attributes below
                     orderedList.setAttribute('id', 'list')
@@ -161,16 +170,19 @@ const filterFunction= ()=>{
                     newsStory.setAttribute('class', 'news-story')
                     newsStory.setAttribute('id', 'story-url')
                     newsType.setAttribute('class', 'news-type')
+                    postedOn.setAttribute('id', 'post-time')
                     
                     // now pass in data from the api
                     newsTitle.textContent= data[count].fields.title;
                     newsStory.href= data[count].fields.url;
                     newsStory.textContent= 'Link'
-                    newsType.textContent= 'Type: ' + data[count].fields.type;
+                    newsType.textContent= '| Type: ' + data[count].fields.type;
+                    postedOn.textContent= '| Time posted: ' + data[count].fields.time
                     // append to their respective parents
                     newsParentContainer.appendChild(newsTitle)
                     itemDetails.appendChild(newsStory)
                     itemDetails.appendChild(newsType)
+                    itemDetails.appendChild(postedOn)
                     newsParentContainer.appendChild(itemDetails)
                     orderedList.appendChild(newsParentContainer)
                     listContainer.appendChild(orderedList)
