@@ -36,14 +36,19 @@ header{
 header>*{
     margin: 5px;
 }
-#logo{
+#logo-link{
     text-decoration: none;
     width: 30%;
     height: 20%;
     border-radius: 50%;
     cursor: pointer;
+    color: white;
 }
-
+#logo-img{
+    width:10%;
+    height: 10%;
+    border-radius:15px;
+}
 .large-screen{
     display: flex;
     flex-flow: row nowrap;
